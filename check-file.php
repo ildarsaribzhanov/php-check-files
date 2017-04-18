@@ -72,6 +72,7 @@ function get_files($dir = "./")
 {
 	
 	global $hosting_path, $last_check, $no_formats_file, $exclude_path, $exclude_files;
+	
 	$result = array();
 	$itm    = array();
 	
@@ -82,7 +83,7 @@ function get_files($dir = "./")
 				$time_attr = filectime("$dir/$item");
 				$format    = get_file_type("$dir/$item");
 				
-				if (in_array($format, $no_formats_file) && ($time_cont > $last_check || $time_attr > $last_check)) {
+				if (! in_array($format, $no_formats_file) && ($time_cont > $last_check || $time_attr > $last_check)) {
 					$itm['time_cont'] = date('d.m.Y H:i', $time_cont);
 					$itm['time_attr'] = date('d.m.Y H:i', $time_attr);
 					$itm['path']      = str_replace($hosting_path . '/', '', "$dir/$item");
@@ -101,7 +102,6 @@ function get_files($dir = "./")
 	return $result;
 }
 
-;
 
 
 /******************************************************************************/
