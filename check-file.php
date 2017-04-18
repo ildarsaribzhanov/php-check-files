@@ -6,10 +6,10 @@
 /*****************************************************************************/
 
 // Корневой каталог
-$hosting_path = '/home/s/saw10332';
+$hosting_path = 'path or getcwd()';
 
-// Какие форматы файлов проверять
-$formats_file = array('php', 'js', 'htaccess', 'gif');
+// Какие форматы файлов не проверять
+$no_formats_file = array('jpg', 'jpeg', 'png', 'log');
 
 // Исключаемые папки
 $exclude_path = array(
@@ -25,10 +25,10 @@ $exclude_files = array(
 $last_check  = mktime(date('H')-2, date('i'), 0, date("m")  , date("d"), date("Y"));
 
 // Название хостинга, для письма
-$hosting_name = 'saw10332';
+$hosting_name = 'hosting_name';
 
 // Email куда слать уведомления
-$admin_email = 'ildar@sawtech.ru';
+$admin_email = 'admin@email.domain';
 
 
 /*****************************************************************************/
@@ -73,7 +73,7 @@ unlink($file_name);
 /******************************************************************************/
 function get_files($dir = "./"){
 	
-	global $hosting_path, $last_check, $formats_file, $exclude_path, $exclude_files;
+	global $hosting_path, $last_check, $no_formats_file, $exclude_path, $exclude_files;
 	$result = array();
 	$itm = array();
  
@@ -84,7 +84,7 @@ function get_files($dir = "./"){
 				$time_attr = filectime("$dir/$item");
 				$format = get_file_type("$dir/$item");
  
-				if( in_array($format, $formats_file)
+				if( in_array($format, $no_formats_file)
 					&& ($time_cont > $last_check || $time_attr > $last_check) 
 				){
 					$itm['time_cont'] = date('d.m.Y H:i', $time_cont);
@@ -168,4 +168,3 @@ function send_mail($to, $from, $subject, $html, $file_path = false){
 		return true;  
 	}
 }
-?>
