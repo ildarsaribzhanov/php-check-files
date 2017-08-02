@@ -111,7 +111,11 @@ function get_file_type($link)
 {
 	$path_info = pathinfo($link);
 	
-	return $path_info['extension'];
+	if( isset($path_info['extension']) ) {
+		return $path_info['extension'];
+	}
+	
+	return '';
 }
 
 /******************************************************************************/
