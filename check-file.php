@@ -43,9 +43,9 @@ if ( ! $res) {
 }
 
 // Придется формировать письмо с измененными файлами
-$filecontent = "Дата изменения атрибутов;Дата изменения содержимого;Путь\n";
+$filecontent = "Дата изменения атрибутов,Дата изменения содержимого,Путь\n";
 foreach ($res as $itm) {
-	$filecontent .= $itm['time_cont'] . ';' . $itm['time_attr'] . ';' . $itm['path'] . "\n";
+	$filecontent .= $itm['time_cont'] . ',' . $itm['time_attr'] . ',' . $itm['path'] . "\n";
 };
 
 
